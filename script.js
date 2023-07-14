@@ -66,7 +66,7 @@ plusMinusKey.addEventListener("click", function() {
 
 const percentKey = document.querySelector("#percent");
 percentKey.addEventListener("click", function() {
-    screenString = (parseFloat(screenString)/100).toString();
+    screenString = round((parseFloat(screenString)/100), 6).toString();
     updateScreen();
 });
 
