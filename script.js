@@ -56,6 +56,9 @@ plusMinusKey.addEventListener("click", function() {
     if(screenString === "0") {
         screenString = "-";
         isScreenCleared = false;
+    } else if (screenString === "-") {
+        screenString = "0";
+        isScreenCleared = true;
     } else if(screenString[0] !== "-") {
         screenString = "-" + screenString;
     } else {
