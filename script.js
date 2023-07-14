@@ -1,8 +1,8 @@
-const keypad = document.querySelector(".keypad");
 const screen = document.querySelector(".screen");
 const valueButtons = document.querySelectorAll(".num");
 const operationArray = [];
 let isScreenCleared = true;
+let wasLastKeyOperation = false;
 let screenString = "0";
 let currentOperation = "";
 
@@ -30,9 +30,15 @@ clearKey.addEventListener("click", function() {
 const opKeys = document.querySelectorAll(".op");
 opKeys.forEach(button => {
     button.addEventListener("click", function() {
+        if(wasLastKeyOperation) {
+            currentOperation = this.value;
+            return;
+        }
+
         operationArray.push({operator: currentOperation, value: parseFloat(screenString)});
         currentOperation = this.value;
         isScreenCleared = true;
+        wasLastKeyOperation = true;
     });
 });
 
@@ -82,6 +88,7 @@ valueButtons.forEach(button => {
         screenString = this.value;
         isScreenCleared = false;
     }
+    wasLastKeyOperation = false;
     updateScreen();
     });
 });
@@ -112,6 +119,7 @@ function calculate() {
 
     operationArray.length = 0;
     currentOperation="";
+    wasLastKeyOperation = false;
     updateScreen();
 
 }
